@@ -559,7 +559,7 @@ AddToFavs();
 
 
 function ReporCorStar(){				//repor cor inicial da star qdo transita para o next book
-$(".likestar.glyphicon-star").css("color","white");
+$(".likestar.glyphicon-star").css("color","#9999ff");
 };
 
 

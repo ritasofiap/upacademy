@@ -31,6 +31,11 @@ h1:hover{
 }
 
 
+#br {
+	font-size: 1px;
+}
+
+
 .start{
 	font-family: 'Press Start 2P', cursive;
 	color: white;
@@ -190,6 +195,7 @@ h1:hover{
 
 .book.active {
 	display: block;
+	
 }
 
 .cover{
@@ -517,7 +523,7 @@ h1:hover{
 
 .glyphicon-repeat {
 	font-size: 20px;
-	color: #262626;  /*pq ainda nao está funcional*/
+	color: #9999ff; 
 	/*color: #099FFF;*/
 	padding: 10px;
 	
@@ -533,7 +539,7 @@ h1:hover{
 
 .glyphicon-forward {
 	font-size: 20px;
-	color: #262626;  
+	color: #9999ff;  
 	padding: 9px 5px 9px 12px;
 	border-color: #b7aad4;
 	border-width:1px; 
@@ -548,11 +554,11 @@ h1:hover{
 
 .likestar {
 	font-size: 20px;
-	color: white;
+	color: #9999ff;
 	padding: 10px;
 
 	border-color: #b7aad4;
-	border-width:1px; 
+	/*border-width:1px; */
 	border-radius: 25px;
 	background-color: #161122;
 	-moz-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
@@ -837,8 +843,6 @@ color: #099FFF;
 
 
 
-
-
 .footer {
 	text-align: center;
 	color: #b3b3ff;
@@ -930,6 +934,11 @@ color: #099FFF;
 	color: white;
 }
 
+.divider{
+	width: 5px;
+	display: inline-block;
+
+}
 
 
 
@@ -969,6 +978,11 @@ color: #099FFF;
 		font-size: 15px;
 	}
 
+.divider{
+	width: 1px;
+	display: inline-block;
+
+}
 
 	
       						
