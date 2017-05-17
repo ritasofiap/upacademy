@@ -228,9 +228,9 @@ h1:hover{
 	text-decoration: none;
 }
 
-/*.author {
-	font-weight: bold;
-}*/
+.author {
+
+}
 
 .authorsection {
 	font-family: 'Raleway', sans-serif;
@@ -240,6 +240,11 @@ h1:hover{
 	border-style: none;
 	margin-top:5px;
 	padding: 10px 10px 10px 0px;
+}
+
+.averagerating {
+	font-family: 'Press Start 2P', cursive;
+	font-size: 10px;
 }
 
 .booktext {
@@ -268,8 +273,9 @@ h1:hover{
 	text-align: justify;
 }
 
-.glyphicon-star-empty, .glyphicon-book{
+.glyphicon-star-empty {
 	font-size: 18px;
+	color: #ffff66;
 }
 
 
@@ -451,7 +457,7 @@ h1:hover{
 
 
 .links{
-	font-variant: small-caps;
+	
 	margin-top: 15px;
 	margin-left: 0px;
 	margin-bottom: 5px;
@@ -524,6 +530,22 @@ h1:hover{
 	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
 }
 
+
+.glyphicon-forward {
+	font-size: 20px;
+	color: #262626;  
+	padding: 9px 5px 9px 12px;
+	border-color: #b7aad4;
+	border-width:1px; 
+	border-radius: 25px;
+	background-color: #161122;
+	-moz-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+
 .likestar {
 	font-size: 20px;
 	color: white;
@@ -542,7 +564,7 @@ h1:hover{
 	font-size: 16px;
 }
 
-.glyphicon-repeat:hover {
+.glyphicon-repeat:hover, .glyphicon-forward:hover {
 	color: #00FF66;
 }
 
@@ -897,7 +919,7 @@ color: #099FFF;
 	font-size: 20px;
 	}
 
-	.glyphicon-repeat {
+	.glyphicon-repeat, .glyphicon-forward{
 	font-size: 15px;
 	color: #262626;  /*pq ainda nao está funcional*/
 	/*color: #099FFF;*/
