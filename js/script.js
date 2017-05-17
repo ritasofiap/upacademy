@@ -335,6 +335,11 @@ $("button.backlike").click(function() {
 });
 
 
+//lenght likes dislikes no fim testar
+// .listalikes > a
+// .listadilikes > a
+// ou $(".lista").children("a").lenght
+
 //TRY AGAIN BUTTON//
 $('.backbtn').click(function() {
 		counterdislike=0; //reset ao contador qdo try again
