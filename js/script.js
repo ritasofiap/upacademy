@@ -397,6 +397,7 @@ $('.backbtn').click(function() {
 		$('.recommendations').removeClass("active");
 		$('.listalikes').empty();
 		$('.listadislikes').empty();
+		$('.favspage').empty();
 	});
 }
 
@@ -487,6 +488,8 @@ Start();
 
 //-------------------------------------------------//
 
+//----------SAIR DOS FAVS po book inicial---------//
+
 function BackFromFavs(){
 	
 
@@ -515,11 +518,6 @@ BackFromFavs();
 
 
 
-
-
-
-
-
 //------------ACEDER AOS FAVORITOS----------//
 
 function ClickFavs(){
@@ -544,6 +542,9 @@ function ClickFavs(){
 
 ClickFavs();
 
+
+
+
 //-------------------------------------//
 
 //---------ADICIONAR AOS FAVORITOS qdo clicka star-------//
@@ -563,13 +564,34 @@ function AddToFavs(){
 
 AddToFavs();
 
+
+
+// function RemoveFromFavs(){
+	
+// 	$(".star").click(function(){
+
+// 	$parent = $(".book.active");
+// 	$cover = $parent.find('.imglink');
+
+// 	$(".likestar.glyphicon-star").css("color","white");
+
+// 	$(".favspage").find($cover).remove();
+
+// };
+
+// RemoveFromFavs();
+
+
+
+
+
 // $(".star").toggle(function(){    //esta.me a esconder a star em vez d alternar a funcao a correr
 
-// 		$cover.clone().appendTo('.favspage');
-// 		$('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
+// $cover.clone().appendTo('.favspage');
+// $('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
 	
-// 	}, function() {
-// 		$(".favspage").find(".imglink").remove();
+// }, function() {
+// $(".favspage").find($cover).remove();
 		
 // });
 

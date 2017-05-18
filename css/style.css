@@ -436,10 +436,10 @@ h1:hover{
 }
 
 
-#backfromfavstxt {
+/*#backfromfavstxt {
 	font-family: 'Raleway', sans-serif;
 	font-size: 15px;
-}
+}*/
 
 
 
@@ -544,11 +544,11 @@ h1:hover{
 	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
 }
 
-.glyphicon-repeat, {
+.glyphicon-repeat, .backlike{
 	font-size: 20px;
 	color: #9999ff; 
 	/*color: #099FFF;*/
-	padding: 10px;
+	padding: 6px 3px 3px 6px;
 	
 	border-color: #b7aad4;
 	border-width:1px; 
