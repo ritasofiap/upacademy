@@ -36,22 +36,26 @@ var UserID = "117214680027185876068";
  							<p class="description"></p>
  										
  							<div class="authorsection">
- 								<span class="glyphicon glyphicon-book"></span>
+ 								<span class="author">By </span>
  							 	<span class="authorsresults"></span>
  							</div>
  							
  							<div class="ratingsection">
- 			 					<span class="glyphicon glyphicon-star-empty"></span>
+ 			 					<span class="glyphicon glyphicon-star-empty"> </span>
  			 					<span class="averagerating"></span>	
   							</div>		
 
  						</div>
  						 																			
  						<div class="links">
- 							<a target="_blank" class="linklivros preview" href="">Preview</a>	
+ 							<a target="_blank" class="linklivros preview" href="">
+ 							<span class="glyphicon glyphicon-book"></span>
+ 							 Preview</a>	
 
- 							<a target="_blank" class="linklivros googleplay" href="">Buy on Google Play 
- 								<span class="priceresults"></span>
+ 							<a target="_blank" class="linklivros googleplay" href="">
+ 							<span class="glyphicon glyphicon-shopping-cart"></span>
+ 							 Google Play 
+ 							<span class="priceresults"></span>
  								
  							</a>						
  											
@@ -135,7 +139,7 @@ function BookTransitiontoLastPage(){		//quando é o last book (vai para lastpage
 //-----//
 
 function BookTransition(){				//entre books (vai para o next book)
-	$parent.fadeOut(50, function(){					//colocar delay(100)
+	$parent.delay(150).fadeOut(50, function(){					//colocar delay(100)
 		$parent.removeClass("active");
 
 			$(window).scrollTop(0);
@@ -242,6 +246,47 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 
 ClickDislike();
 
+
+
+function Skip(){				//qdo clicka like (adiciona à lista likes + transita para o next book/lastpage)
+
+
+	$("button.skip").on( "click", function() {
+
+		
+		
+		
+		if(!inAnimation){	
+	
+			inAnimation = true;
+			$parent = $(".book.active");
+			$next = $parent.next(".book");
+			$lastpage = $(".lastpage");
+	
+				
+				ReporCorStar();
+
+			if ($parent.index() == $(".book").length-1){
+		
+				BookTransitiontoLastPage();
+			//inAnimation = false;	
+	
+			}else{
+
+				BookTransition();	
+			//inAnimation = false;	
+
+			};
+		};
+	});
+};
+
+Skip();
+
+
+
+
+
 //-----------------------------------------------------------------------//
 	
 //-------------------VOLTAR AO LIVRO ANTERIOR-----------------//
@@ -256,6 +301,7 @@ function ClickBackLike(){
 	$previous = $parent.prev(".book");
 	
 		registolikes.pop();
+
 		$(".lista a:last-of-type").remove();
 	
 		if ($parent.index() == $(".book").index(0)){	//se first book    experimeentar ao contrario com SE o index for >0
@@ -318,14 +364,14 @@ $('button.btndislike').click(function() {
 	});
 
 
-$("button.backlike").click(function() {
+$("button.backlike").click(function() {      //confirmar se está bem
 	
 		if ((islike = true) && (counterlike > 0)){
 
 			counterlike--;			
 			$('.likecounter').text(counterlike);
 		
-		}else if ((islike = false) && (counterdislike > 0)){			
+		}else{			
 
 			counterdislike--;
 			$('.dislikecounter').text(counterdislike);
@@ -518,7 +564,7 @@ AddToFavs();
 
 
 function ReporCorStar(){				//repor cor inicial da star qdo transita para o next book
-$(".likestar.glyphicon-star").css("color","white");
+$(".likestar.glyphicon-star").css("color","#9999ff");
 };
 
 
