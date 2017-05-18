@@ -139,7 +139,7 @@ function BookTransitiontoLastPage(){		//quando é o last book (vai para lastpage
 //-----//
 
 function BookTransition(){				//entre books (vai para o next book)
-	$parent.delay(150).fadeOut(50, function(){					//colocar delay(100)
+	$parent.fadeOut(50, function(){					//colocar delay(100)
 		$parent.removeClass("active");
 
 			$(window).scrollTop(0);
@@ -486,6 +486,39 @@ $(".pstart").click(function(){
 Start();
 
 //-------------------------------------------------//
+
+function BackFromFavs(){
+	
+
+	$(".backfromfavs").click(function(){
+	
+		$(".favorites").fadeOut(50, function(){
+			$(".favorites").removeClass("active");
+
+			$(window).scrollTop(0);
+	
+			$firstbook.fadeIn(300, function(){
+				$firstbook.addClass("active");
+			});
+
+			$conjuntobuttons.fadeIn(0, function(){
+				$conjuntobuttons.addClass("active");
+			});
+
+		});
+
+		});
+};
+
+
+BackFromFavs();
+
+
+
+
+
+
+
 
 //------------ACEDER AOS FAVORITOS----------//
 
