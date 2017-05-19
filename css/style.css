@@ -36,17 +36,18 @@ h1:hover{
 }
 
 
-.start{
+.start {
 	font-family: 'Press Start 2P', cursive;
 	color: white;
 	text-align: center;
 	margin-top: 100px;
-}
 
-.start {
 	height: 900px;
 	margin-top: 0px;
+
 	background: linear-gradient(#0b0811,black);
+
+
 	padding-top: 300px;
 	-moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
     -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
@@ -772,15 +773,25 @@ color: #099FFF;
 	display: inline-block;
 	background-color: #0b0811;
 	border-color: transparent;
-	border-style: solid;
+	border-style: dotted;
+	border-width: 3px;
 	margin-top: 50px;
 	padding-bottom: 8px;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	padding-top: 15px;
 	padding-bottom: 15px;
 	font-weight: lighter;
 	line-height: 200%;
 }
+
+
+@keyframes blink { 
+   50% { border-color: #352b54;} 
+}
+.otherrecom { 
+    animation: blink .4s step-end infinite alternate;
+}
+
 
 .otherbooks{
 	
@@ -886,17 +897,32 @@ color: #099FFF;
 }
 
 
-
 @media screen and (max-width: 1150px){
 
 	#discworld {
 	max-width: 250px;
-}
+	}
 
 
-.navbar-form, .navbar-left {
+	.navbar-form, .navbar-left {
 	border: none;
-}
+	}
+
+	.glyphicon-thumbs-down, .glyphicon-thumbs-up {
+	font-size: 23px;
+	}
+
+	.glyphicon-repeat, .glyphicon-forward{
+	font-size: 15px;
+	}
+
+	.divider{
+	width: 0px;
+	display: inline-block;
+	}	
+
+
+
 
 @media screen and (max-width: 550px){
 	h1{
@@ -930,8 +956,12 @@ color: #099FFF;
 		font-size: 13px;
 	}
 
-	.otherbooks{
-		font-size: 8px;
+	.otherrecom.active {
+		font-size: 10;
+	}
+
+	.otherbooks {
+		font-size: 10px;
 	}
 
 	.glyphicon-menu-right, .glyphicon-menu-left {
@@ -940,7 +970,7 @@ color: #099FFF;
 	}
 
 
-	.glyphicon-thumbs-down, .glyphicon-thumbs-up,{
+	.glyphicon-thumbs-down, .glyphicon-thumbs-up {
 	font-size: 18px;
 	}
 
@@ -950,16 +980,12 @@ color: #099FFF;
 	/*color: #099FFF;*/
 	}
 
-.likestar {
+	.likestar {
 	font-size: 12px;
 	color: white;
-}
+	}
 
-.divider{
-	width: 5px;
-	display: inline-block;
 
-}
 
 
 
@@ -982,9 +1008,14 @@ color: #099FFF;
 	font-size: 12px;
 	}
 
-	.otherbooks{
-		font-size: 8px;
+	.otherrecom.active {
+		font-size: 10px;
 	}
+
+	.otherbooks {
+		font-size: 10px;
+	}
+	
 
 	.glyphicon-menu-right, .glyphicon-menu-left {
 	font-size:8px;
@@ -995,19 +1026,17 @@ color: #099FFF;
 		font-size: 12px;
 	}
 
+	.glyphicon-thumbs-down, .glyphicon-thumbs-up {
+	font-size: 18px;
+	}
+
 	.barra {
 		font-size: 15px;
 	}
 
-	.divider{
-	width: 1px;
-	display: inline-block;
-
-	}
+	
 
 	
-      						
-}
 
 
 
