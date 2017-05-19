@@ -420,16 +420,14 @@ h1:hover{
 
 
 .backfromfavs {
-	-webkit-transition-duration: 0.2s; 
-	-moz-transform: 0.2s; 
-    transition-duration: 0.2s;
+
     background-color: transparent;
     /*background: rgba(255, 255, 255, 0.1);*/
     border-radius: 8px;
     border-color: transparent;
     font-size: 18px;
 	text-align: center;
-	line-height: 175%;
+
 	/*padding: 20px 20px 20px 20px;*/
 	color: white;
 	outline: 0 !important;
@@ -920,9 +918,9 @@ color: #099FFF;
 	font-size: 15px;
 	}
 
-	.glyphicon {
+	/*.glyphicon {
 	font-size: 25px;
-	}
+	}*/
 
 	.links{
 		font-size: 11px;
@@ -943,17 +941,17 @@ color: #099FFF;
 
 
 	.glyphicon-thumbs-down, .glyphicon-thumbs-up,{
-	font-size: 20px;
+	font-size: 18px;
 	}
 
 	.glyphicon-repeat, .glyphicon-forward{
-	font-size: 15px;
+	font-size: 10px;
 	color: #262626;  /*pq ainda nao está funcional*/
 	/*color: #099FFF;*/
 	}
 
 .likestar {
-	font-size: 15px;
+	font-size: 12px;
 	color: white;
 }
 
@@ -989,23 +987,23 @@ color: #099FFF;
 	}
 
 	.glyphicon-menu-right, .glyphicon-menu-left {
-	font-size:10px;
+	font-size:8px;
 	font-weight: bold;
 }
 
 	.glyphicon-user, .glyphicon-log-in, .glyphicon-star, .glyphicon-search{
-		font-size: 13px;
+		font-size: 12px;
 	}
 
 	.barra {
 		font-size: 15px;
 	}
 
-.divider{
+	.divider{
 	width: 1px;
 	display: inline-block;
 
-}
+	}
 
 	
       						
