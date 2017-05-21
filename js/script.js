@@ -3,13 +3,15 @@
 
 function LoadBooks() {
 
-	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
+var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
 
-	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
 
 var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
 
 var UserID = "117214680027185876068";
+
+
 
 
 $.ajax({
@@ -78,22 +80,6 @@ $.ajax({
 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
 
 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
-			// $(".priceresults", $currentBook).html(item.saleInfo.listPrice.amount);
-
-			// $(".publicationdate", $currentBook).html(item.volumeInfo.publishedDate);
-
-
-
-
-
- 			// HTML
- 			// <div class="publicationdatesection">
- 			// <span>Publication date: </span>
- 			// <span class="publicationdate"></span>	
- 			// </div>	
-
- 			//
-
 
  		});
 	});
@@ -108,6 +94,85 @@ LoadBooks();
 
 //----------------------------------------------------------------//
 
+//----------------------------//
+
+
+// 	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+// 		$input = $("#inputsearch").val();
+	
+// 	$("#submitsearch").click(function() {
+
+
+// 	$.ajax({url: "https://www.googleapis.com/books/v1/volumes?q=" + input}).done(function(data){
+
+// 		$.each(data.items, function(index, item){
+
+
+// 			var HTMLtoInsert = `
+// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+// 			<div>	
+// 			<div class="cover">
+// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+// 			<h1></h1>
+// 			</div>
+// 			</div>
+// 			<div class="text">				
+// 			<div class="booktext">
+// 			<p class="description"></p>
+
+// 			<div class="authorsection">
+// 			<span class="author">By </span>
+// 			<span class="authorsresults"></span>
+// 			</div>
+
+// 			<div class="ratingsection">
+// 			<span class="glyphicon glyphicon-star-empty"> </span>
+// 			<span class="averagerating"></span>	
+// 			</div>		
+
+// 			</div>
+
+// 			<div class="links">
+// 			<a target="_blank" class="linklivros preview" href="">
+// 			<span class="glyphicon glyphicon-book"></span>
+// 			Preview</a>	
+
+// 			<a target="_blank" class="linklivros googleplay" href="">
+// 			<span class="glyphicon glyphicon-shopping-cart"></span>
+// 			Google Play 
+// 			<span class="priceresults"></span>
+
+// 			</a>						
+
+// 			</div>
+
+// 			</div>
+// 			</div>
+// 			`;
+
+			
+// 			$(".bookDiv").append(HTMLtoInsert);
+// 			$currentBook = $(".book").eq(index);
+
+// 			$("h1", $currentBook).html(item.volumeInfo.title);	
+// 			$(".description", $currentBook).html(item.volumeInfo.description);
+// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+
+// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+
+//  		});
+// 	});
+
+
+
+// });
+
+
+
 //-------------RELOAD page onclick menu tinderbook--------------------------//
 
 
@@ -121,61 +186,6 @@ $(".reloadpage").click(function(){
 $parent = $(".book.active");
 $next = $parent.next(".book");
 $lastpage = $(".lastpage");
-
-
-// function BookTransitiontoLastPage(){		//quando é o last book (vai para lastpage e desaparecem os butoes)
-// 	$parent.fadeOut(50, function(){
-// 			$parent.removeClass("active");
-// 			$(window).scrollTop(0);
-
-// 			$lastpage.fadeIn(300, function(){
-// 				$lastpage.addClass("active");
-// 					inAnimation = false;
-// 			});		
-
-// 			$(".buttonsLD").fadeOut(50, function(){
-// 				$(".buttonsLD").removeClass("active");
-// 			});
-
-// 			// $('.recommendations').addClass("active");
-// 			$('.otherrecom').addClass("active");
-
-// 		});
-// };
-
-//-----//
-
-// function BookTransition(){				//entre books (vai para o next book)
-// 	$parent.fadeOut(50, function(){					//colocar delay(100)
-// 		$parent.removeClass("active");
-
-// 			$(window).scrollTop(0);
-
-// 		$next.fadeIn(300, function(){
-// 			$next.addClass("active");
-// 			inAnimation = false;	
-
-// 		});
-// 	});
-// };
-
-//-----//
-
-// function AddToLikes(){					//adiciona cover à lista dos likes
-// 	$cover = $parent.find('.imglink');
-// 	$cover.clone().appendTo('.listalikes');
-// 	$('.listalikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");
-// };
-
-// //-----//
-
-// function AddToDislikes(){				//adiciona cover à lista dos dislikes
-// 	$cover = $parent.find('.imglink');
-// 	$cover.clone().appendTo('.listadislikes');
-// 	$('.listadislikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");
-// };
-
-//-----//
 
 var islike = false;
 var inAnimation = false;
@@ -417,24 +427,6 @@ function ClickBackLike(){
 ClickBackLike();
 
 
-// function BookTransitionPrevious(){				//entre books (vai para o prev book)
-// 	$parent = $(".book.active");
-// 	$previous = $parent.prev(".book");
-
-// 	$parent.fadeOut(50, function(){
-// 		$parent.removeClass("active");
-
-// 			$(window).scrollTop(0);
-
-// 		$previous.fadeIn(300, function(){
-// 			$previous.addClass("active");
-
-// 		});
-// 	});
-// };
-
-
-
 //-------------CONTADOR LIKES----------------------------------------// corrigir por causa do voltar pa tras um livro!!!!!!!!
 
 var counterlike = 0;
@@ -489,8 +481,6 @@ $('.backbtn').click(function() {
 
 ContadorLikes();
 //-------------------------------------------//
-
-
 
 
 //-------------ANIMAÇÃO SETAS-----------------------------//
@@ -650,80 +640,5 @@ function AddToFavs(){
 };
 
 AddToFavs();
-
-
-
-// function RemoveFromFavs(){
-	
-// 	$(".star").click(function(){
-
-// 	$parent = $(".book.active");
-// 	$cover = $parent.find('.imglink');
-
-// 	$(".likestar.glyphicon-star").css("color","white");
-
-// 	$(".favspage").find($cover).remove();
-
-// };
-
-// RemoveFromFavs();
-
-
-
-
-
-// $(".star").toggle(function(){    //esta.me a esconder a star em vez d alternar a funcao a correr
-
-// $cover.clone().appendTo('.favspage');
-// $('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
-
-// }, function() {
-// $(".favspage").find($cover).remove();
-
-// });
-
-
-// function RemoveFromFavs(){
-
-// 	$(".star").click(function(){
-	
-// 		$$parent = $(".book.active");
-// 		$cover = $parent.find('.imglink');
-
-// 		$('.favspage').find($cover).remove();
-
-// 	});
-// };
-
-// RemoveFromFavs();
-
-
-
-//-----//
-
-
-// function ReporCorStar(){				//repor cor inicial da star qdo transita para o next book
-// 	$(".likestar.glyphicon-star").css("color","#9999ff");
-// };
-
-
-//------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
