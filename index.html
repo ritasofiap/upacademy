@@ -97,7 +97,7 @@
 
      						<div class="divider"></div>
 
-     						<button class="btn btnlike" id="btnlike">
+     						<button class="btn btnlike" id="btnlike" data-opinion="like">
      							<span class="glyphicon glyphicon-thumbs-up"></span>
      							<!-- <br> -->
      							<span id="liketxt"><br></span>
@@ -105,14 +105,14 @@
      						<div class="divider"></div>
 
                                    <button class="btn star">
-                                        <span class="likestar glyphicon glyphicon-star"></span>
+                                        <span class="likestar glyphicon glyphicon-star" data-favorite="favorite"></span>
                                         <!--   <br> -->
                                         <span id="liketxt"><br></span>
                                    </button>
 
 
                                    <div class="divider"></div>
-     						<button class="btn btndislike" id="btndislike"> 
+     						<button class="btn btndislike" id="btndislike" data-opinion="dislike"> 
      							<span class="glyphicon glyphicon-thumbs-down"></span>
      							<!-- <br> -->
      							<span id="liketxt"><br></span>
@@ -219,6 +219,9 @@
 
      					</div>
      				</div>
+
+                         <button id="consultDb">Consult Database</button>
+
 
      				<div class="row">
      					<div class="footer col-xs-10 col-xs-offset-1">

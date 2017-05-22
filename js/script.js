@@ -1,17 +1,40 @@
 
+var db = openDatabase('bookdb', '1.0', 'Book DB', 2 * 1024 * 1024);
+
+db.transaction(function (tx) {
+	// elimina a tabela
+	//tx.executeSql('DROP TABLE books');
+
+	//cria a table se não existir
+	
+	tx.executeSql('CREATE TABLE IF NOT EXISTS books (id unique, opinion, favorite)');
+});
+
+
+
+$('#consultDb').click(function(){
+	db.transaction(function (tx) {
+
+		tx.executeSql('SELECT * FROM books', [], function (tx, results) {
+			$.each(results.rows,function(index,item){
+	   			//output de todas as rows/todos os resultados
+	   			console.log(item);
+	   		});
+		}, null);
+	});
+});
+
 //-----------ELEMENTOS HTML--------------------------------------//
 
 function LoadBooks() {
 
-var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
+	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
 
-var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
 
 var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
 
 var UserID = "117214680027185876068";
-
-
 
 
 $.ajax({
@@ -30,6 +53,7 @@ $.ajax({
 			<div>	
 			<div class="cover">
 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+			<input type="hidden" class="hiddenFieldId"></input>
 			<h1></h1>
 			</div>
 			</div>
@@ -81,7 +105,9 @@ $.ajax({
 
 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
 
- 		});
+			$('.hiddenFieldId',$currentBook).text(item.id);
+
+		});
 	});
 
 };
@@ -90,87 +116,6 @@ LoadBooks();
 
 
 // MY BOOKSHELF LINK https://www.googleapis.com/books/v1/users/117214680027185876068/bookshelves/1001/volumes?key=AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg
-
-
-//----------------------------------------------------------------//
-
-//----------------------------//
-
-
-// 	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
-// 		$input = $("#inputsearch").val();
-	
-// 	$("#submitsearch").click(function() {
-
-
-// 	$.ajax({url: "https://www.googleapis.com/books/v1/volumes?q=" + input}).done(function(data){
-
-// 		$.each(data.items, function(index, item){
-
-
-// 			var HTMLtoInsert = `
-// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
-// 			<div>	
-// 			<div class="cover">
-// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
-// 			<h1></h1>
-// 			</div>
-// 			</div>
-// 			<div class="text">				
-// 			<div class="booktext">
-// 			<p class="description"></p>
-
-// 			<div class="authorsection">
-// 			<span class="author">By </span>
-// 			<span class="authorsresults"></span>
-// 			</div>
-
-// 			<div class="ratingsection">
-// 			<span class="glyphicon glyphicon-star-empty"> </span>
-// 			<span class="averagerating"></span>	
-// 			</div>		
-
-// 			</div>
-
-// 			<div class="links">
-// 			<a target="_blank" class="linklivros preview" href="">
-// 			<span class="glyphicon glyphicon-book"></span>
-// 			Preview</a>	
-
-// 			<a target="_blank" class="linklivros googleplay" href="">
-// 			<span class="glyphicon glyphicon-shopping-cart"></span>
-// 			Google Play 
-// 			<span class="priceresults"></span>
-
-// 			</a>						
-
-// 			</div>
-
-// 			</div>
-// 			</div>
-// 			`;
-
-			
-// 			$(".bookDiv").append(HTMLtoInsert);
-// 			$currentBook = $(".book").eq(index);
-
-// 			$("h1", $currentBook).html(item.volumeInfo.title);	
-// 			$(".description", $currentBook).html(item.volumeInfo.description);
-// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
-
-// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
-
-//  		});
-// 	});
-
-
-
-// });
-
 
 
 //-------------RELOAD page onclick menu tinderbook--------------------------//
@@ -207,11 +152,24 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			$next = $parent.next(".book");
 			$lastpage = $(".lastpage");
 
+			$id = $('.hiddenFieldId',$parent).text();
+			$opinion = $(this).attr('data-opinion');
+			console.log($opinion);
+
+			//if exists -> update, else insert
+
+			db.transaction(function (tx) {
+				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
+			});
+
+
+
 			$cover = $parent.find('.imglink');  		 //addtolikes
 			$cover.clone().appendTo('.listalikes');
 			$('.listalikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");
 
 			$(".likestar.glyphicon-star").css("color","#9999ff");   //repor cor star
+
 
 			if ($parent.index() == $(".book").length-1){
 
@@ -221,7 +179,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 					$lastpage.fadeIn(300, function(){
 						$lastpage.addClass("active");
-						
+						inAnimation = false;
 					});		
 
 					$(".buttonsLD").fadeOut(50, function(){
@@ -230,7 +188,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
-			inAnimation = false;
+			
 		});
 
 
@@ -251,7 +209,11 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			//inAnimation = false;	
 
 		};
+
 	};
+
+
+
 });
 };
 
@@ -273,11 +235,24 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 			$next = $parent.next(".book");
 			$lastpage = $(".lastpage");
 
+			$id = $('.hiddenFieldId',$parent).text();
+			$opinion = $(this).attr('data-opinion');
+			console.log($opinion);
+
+
+			db.transaction(function (tx) {
+				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');
+			});
+
+
+
+
 			$cover = $parent.find('.imglink');							//add to dislikes
 			$cover.clone().appendTo('.listadislikes');
 			$('.listadislikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");  
 
 			$(".likestar.glyphicon-star").css("color","#9999ff");    //repor cor star
+
 
 			if ($parent.index() == $(".book").length-1){	//se last book
 
@@ -287,6 +262,7 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 
 					$lastpage.fadeIn(300, function(){
 						$lastpage.addClass("active");
+						inAnimation = false;
 					});		
 
 					$(".buttonsLD").fadeOut(50, function(){
@@ -295,8 +271,6 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
-
-			inAnimation = false;
 
 		});
 				
@@ -313,11 +287,13 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 						inAnimation = false;	
 
 					});
-					inAnimation = false;
 				});
 				
 			};
 		};
+
+		
+
 
 	});
 };
@@ -425,6 +401,41 @@ function ClickBackLike(){
 };
 
 ClickBackLike();
+
+
+//---------ADICIONAR AOS FAVORITOS qdo clicka star-------//
+
+function AddToFavs(){	
+
+	$(".star").click(function(){
+
+		$parent = $(".book.active");
+
+		$id = $('.hiddenFieldId',$parent).text();
+		$favorite = $(this).attr('data-favorite');
+
+		db.transaction(function (tx) {
+			tx.executeSql('INSERT INTO books(id, favorite) VALUES("' + $id + '","' + $favorite + '")');
+		});
+
+
+
+
+		$cover = $parent.find('.imglink');
+		$(".likestar.glyphicon-star").css("color","#099FFF");
+
+		$cover.clone().appendTo('.favspage');
+		$('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
+
+	});
+};
+
+AddToFavs();
+
+
+//-------------------------//
+
+
 
 
 //-------------CONTADOR LIKES----------------------------------------// corrigir por causa do voltar pa tras um livro!!!!!!!!
@@ -624,21 +635,96 @@ ClickFavs();
 
 //-------------------------------------//
 
-//---------ADICIONAR AOS FAVORITOS qdo clicka star-------//
 
-function AddToFavs(){	
 
-	$(".star").click(function(){
 
-		$parent = $(".book.active");
-		$cover = $parent.find('.imglink');
-		$(".likestar.glyphicon-star").css("color","#099FFF");
 
-		$cover.clone().appendTo('.favspage');
-		$('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
-	});
-};
 
-AddToFavs();
+
+
+
+
+
+//----------------------------//
+
+
+	// var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+
+	// 	$input = $("#inputsearch").val();
+	
+	// $("#submitsearch").click(function() {
+
+
+	// $.ajax({
+
+	// 	url: "https://www.googleapis.com/books/v1/volumes?q=" + input
+
+	// }).done(function(data){
+
+	// 	$.each(data.items, function(index, item){
+
+
+// 			var HTMLtoInsert = `
+// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+// 			<div>	
+// 			<div class="cover">
+// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+// 			<h1></h1>
+// 			</div>
+// 			</div>
+// 			<div class="text">				
+// 			<div class="booktext">
+// 			<p class="description"></p>
+
+// 			<div class="authorsection">
+// 			<span class="author">By </span>
+// 			<span class="authorsresults"></span>
+// 			</div>
+
+// 			<div class="ratingsection">
+// 			<span class="glyphicon glyphicon-star-empty"> </span>
+// 			<span class="averagerating"></span>	
+// 			</div>		
+
+// 			</div>
+
+// 			<div class="links">
+// 			<a target="_blank" class="linklivros preview" href="">
+// 			<span class="glyphicon glyphicon-book"></span>
+// 			Preview</a>	
+
+// 			<a target="_blank" class="linklivros googleplay" href="">
+// 			<span class="glyphicon glyphicon-shopping-cart"></span>
+// 			Google Play 
+// 			<span class="priceresults"></span>
+
+// 			</a>						
+
+// 			</div>
+
+// 			</div>
+// 			</div>
+// 			`;
+
+
+// 			$(".bookDiv").append(HTMLtoInsert);
+// 			$currentBook = $(".book").eq(index);
+
+// 			$("h1", $currentBook).html(item.volumeInfo.title);	
+// 			$(".description", $currentBook).html(item.volumeInfo.description);
+// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+
+// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+
+//  		});
+// 	});
+
+
+
+// });
 
 
