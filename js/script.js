@@ -20,9 +20,11 @@ $('#consultDb').click(function(){
 	   			//output de todas as rows/todos os resultados
 	   			console.log(item);
 	   		});
-		}, null);
+		}, null); //null optional
 	});
 });
+
+
 
 //-----------ELEMENTOS HTML--------------------------------------//
 
@@ -123,6 +125,11 @@ LoadBooks();
 
 $(".reloadpage").click(function(){
 	window.location.reload();
+
+	db.transaction(function (tx) {
+		tx.executeSql('DROP TABLE books');
+	});
+
 });
 
 
@@ -152,6 +159,13 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			$next = $parent.next(".book");
 			$lastpage = $(".lastpage");
 
+			$cover = $parent.find('.imglink');  		 //addtolikes
+			$cover.clone().appendTo('.listalikes');
+			$('.listalikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");
+
+			$(".likestar.glyphicon-star").css("color","#9999ff");   //repor cor star
+
+
 			$id = $('.hiddenFieldId',$parent).text();
 			$opinion = $(this).attr('data-opinion');
 			console.log($opinion);
@@ -162,13 +176,33 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
 			});
 
+		
+			// db.transaction(function (tx) {
+
+			// 	IF EXISTS (SELECT $opinion FROM books WHERE $id='')
+				
+			// 	tx.executeSql('UPDATE books SET $opinion='' WHERE $id='', [$id,$opinion]');   
+						
+			// 	ELSE
+							
+			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?), [$id,$opinion]');    //
+			// });
 
 
-			$cover = $parent.find('.imglink');  		 //addtolikes
-			$cover.clone().appendTo('.listalikes');
-			$('.listalikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");
 
-			$(".likestar.glyphicon-star").css("color","#9999ff");   //repor cor star
+			// IF EXISTS (SELECT $opinion FROM books WHERE $id=''){
+			
+			// 	db.transaction(function (tx) {
+			// 	tx.executeSql('UPDATE books SET $opinion='' WHERE $id='', [$id,$opinion]');   
+			// 	});
+		
+			// }ELSE{
+			
+			// 	db.transaction(function (tx) {
+			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?), [$id,$opinion]');    //
+			// 	});
+			// };
+
 
 
 			if ($parent.index() == $(".book").length-1){
@@ -212,8 +246,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 	};
 
-
-
+					
 });
 };
 
@@ -235,23 +268,23 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 			$next = $parent.next(".book");
 			$lastpage = $(".lastpage");
 
-			$id = $('.hiddenFieldId',$parent).text();
-			$opinion = $(this).attr('data-opinion');
-			console.log($opinion);
-
-
-			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');
-			});
-
-
-
-
 			$cover = $parent.find('.imglink');							//add to dislikes
 			$cover.clone().appendTo('.listadislikes');
 			$('.listadislikes').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px");  
 
 			$(".likestar.glyphicon-star").css("color","#9999ff");    //repor cor star
+
+			$id = $('.hiddenFieldId',$parent).text();
+			$opinion = $(this).attr('data-opinion');
+			console.log($opinion);
+
+			//if exists -> update, else insert
+
+			db.transaction(function (tx) {
+				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
+			});
+
+
 
 
 			if ($parent.index() == $(".book").length-1){	//se last book
@@ -291,8 +324,6 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 				
 			};
 		};
-
-		
 
 
 	});
@@ -413,11 +444,11 @@ function AddToFavs(){
 
 		$id = $('.hiddenFieldId',$parent).text();
 		$favorite = $(this).attr('data-favorite');
-
+		console.log($favorite);
+ss
 		db.transaction(function (tx) {
-			tx.executeSql('INSERT INTO books(id, favorite) VALUES("' + $id + '","' + $favorite + '")');
+			tx.executeSql('INSERT INTO books(id, favorite) VALUES("' + $id + '",ss"' + $favorite + '")');
 		});
-
 
 
 
@@ -522,6 +553,11 @@ function TryAgain(){
 		$startpage = $(".start");
 
 		$(".likestar.glyphicon-star").css("color","#9999ff");
+
+		// db.transaction(function (tx) {
+		// tx.executeSql('DROP TABLE books');
+		// });
+
 
 		$lastpage.fadeOut(50, function(){
 			$lastpage.removeClass("active");
@@ -661,6 +697,8 @@ ClickFavs();
 
 	// }).done(function(data){
 
+		//empty book
+
 	// 	$.each(data.items, function(index, item){
 
 
@@ -726,5 +764,43 @@ ClickFavs();
 
 
 // });
+
+
+
+
+//-----------------//
+
+
+//open database
+//create table
+
+
+// function LoadBook(book){
+// 	//load de um livro
+// }
+
+// $('.buttons button').click(function(){
+// 	//click de like/dislike
+// });
+
+// var typing = false;
+// var current = null;  //variavel q guarda o timeout pa limpar ou nao os 2seg da pesquisa automatica
+// var currentIndex = 0;
+
+// $('#tbSearch, #tbFilter').keyup(function(event){
+// 	//keyup dos inputs (indica que o utilizador está a escrever)
+// });
+
+// function autoSearch(){
+// 	//nova pesquisa (por contador ou após pressionar Enter)
+// }
+
+// function getData(){
+// 	//recolha de dados dos inputs/selects e efectuar pedido AJAX para recebermos os livros
+// }
+
+
+// // se quiserem implementar o gif de LOADING 
+// //https://stackoverflow.com/questions/1964839/how-can-i-create-a-please-wait-loading-animation-using-jquery
 
 
