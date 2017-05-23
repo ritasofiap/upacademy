@@ -126,9 +126,9 @@ LoadBooks();
 $(".reloadpage").click(function(){
 	window.location.reload();
 
-	db.transaction(function (tx) {
-		tx.executeSql('DROP TABLE books');
-	});
+	// db.transaction(function (tx) {
+	// 	tx.executeSql('DROP TABLE books');
+	// });
 
 });
 
@@ -172,12 +172,22 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 			//if exists -> update, else insert
 
+			// db.transaction(function (tx) {
+			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
+			// });
+
+
 			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
+				tx.executeSql('SELECT COUNT(*) as count FROM books WHERE id = (?)', [$id], function(tx, count){
+					if (count.rows[0].count==0){
+						tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?)',[$id, $opinion]);
+					}else{
+						tx.executeSql('UPDATE books SET opinion = (?) WHERE id = (?)', [$opinion, $id]);
+					};
+				});
 			});
 
 		
-			// db.transaction(function (tx) {
 
 			// 	IF EXISTS (SELECT $opinion FROM books WHERE $id='')
 				
@@ -190,21 +200,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 
 
-			// IF EXISTS (SELECT $opinion FROM books WHERE $id=''){
-			
-			// 	db.transaction(function (tx) {
-			// 	tx.executeSql('UPDATE books SET $opinion='' WHERE $id='', [$id,$opinion]');   
-			// 	});
 		
-			// }ELSE{
-			
-			// 	db.transaction(function (tx) {
-			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?), [$id,$opinion]');    //
-			// 	});
-			// };
-
-
-
 			if ($parent.index() == $(".book").length-1){
 
 				$parent.fadeOut(50, function(){			//book transition to last page
@@ -278,12 +274,15 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 			$opinion = $(this).attr('data-opinion');
 			console.log($opinion);
 
-			//if exists -> update, else insert
-
-			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
+				db.transaction(function (tx) {
+				tx.executeSql('SELECT COUNT(*) as count FROM books WHERE id = (?)', [$id], function(tx, count){
+					if (count.rows[0].count==0){
+						tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?)',[$id, $opinion]);
+					}else{
+						tx.executeSql('UPDATE books SET opinion = (?) WHERE id = (?)', [$opinion, $id]);
+					};
+				});
 			});
-
 
 
 
@@ -305,7 +304,7 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
 
-		});
+			});
 				
 
 			}else{
@@ -407,6 +406,14 @@ function ClickBackLike(){
 
 		$(".lista a:last-of-type").remove();
 
+			$id = $('.hiddenFieldId', $parent).text();
+		
+			db.transaction(function(tx){
+				tx.executeSql('DELETE FROM books WHERE id = (?)', [$id]);			
+			});
+
+
+
 		if ($parent.index() == $(".book").index(0)){	//se first book    experimeentar ao contrario com SE o index for >0
 			$(".backlike").css("color","white");
 
@@ -445,11 +452,16 @@ function AddToFavs(){
 		$id = $('.hiddenFieldId',$parent).text();
 		$favorite = $(this).attr('data-favorite');
 		console.log($favorite);
-ss
-		db.transaction(function (tx) {
-			tx.executeSql('INSERT INTO books(id, favorite) VALUES("' + $id + '",ss"' + $favorite + '")');
-		});
 
+		db.transaction(function (tx) {
+				tx.executeSql('SELECT COUNT(*) as count FROM Books WHERE id = (?)', [$id], function(tx, count){
+					if (count.rows[0].count==0){
+						tx.executeSql('INSERT INTO Books(id, favorite) VALUES(?,?)',[$id, $favorite]);
+					}else{
+						tx.executeSql('UPDATE books SET favorite = (?) WHERE $id = (?)', [$favorite, $id]);
+					};
+				});
+			});
 
 
 		$cover = $parent.find('.imglink');
