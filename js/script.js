@@ -36,11 +36,13 @@ $('#consultDb').click(function(){
 
 // 		$.ajax({
 
-// 			url: "https://www.googleapis.com/books/v1/volumes?q=" + searchinput + "&maxResults=10"
+// 			url: "https://www.googleapis.com/books/v1/volumes?q=" + searchinput + ""
+
+// 			//"&callback=handleResponse" 
+
+// 			// "&maxResults=10"
 
 // 		}).done(function(data){
-
-// 			console.log(data);
 
 // 		$.each(data.items, function(index, item){
 
