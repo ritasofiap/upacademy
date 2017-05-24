@@ -28,15 +28,101 @@ $('#consultDb').click(function(){
 
 //-----------ELEMENTOS HTML--------------------------------------//
 
+// function LoadBooks() {
+
+// 	$searchinput = $("#inputsearch").val();
+
+// 	$("#submitsearch").on( "click", function() {
+
+// 		$.ajax({
+
+// 			url: "https://www.googleapis.com/books/v1/volumes?q=" + searchinput + "&maxResults=10"
+
+// 		}).done(function(data){
+
+// 			console.log(data);
+
+// 		$.each(data.items, function(index, item){
+
+
+// 				var HTMLtoInsert = `
+// 				<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+// 				<div>	
+// 				<div class="cover">
+// 				<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+// 				<input type="hidden" class="hiddenFieldId"></input>
+// 				<h1></h1>
+// 				</div>
+// 				</div>
+// 				<div class="text">				
+// 				<div class="booktext">
+// 				<p class="description"></p>
+
+// 				<div class="authorsection">
+// 				<span class="author">By </span>
+// 				<span class="authorsresults"></span>
+// 				</div>
+
+// 				<div class="ratingsection">
+// 				<span class="glyphicon glyphicon-star-empty"> </span>
+// 				<span class="averagerating"></span>	
+// 				</div>		
+
+// 				</div>
+
+// 				<div class="links">
+// 				<a target="_blank" class="linklivros preview" href="">
+// 				<span class="glyphicon glyphicon-book"></span>
+// 				Preview</a>	
+
+// 				<a target="_blank" class="linklivros googleplay" href="">
+// 				<span class="glyphicon glyphicon-shopping-cart"></span>
+// 				Google Play 
+// 				<span class="priceresults"></span>
+
+// 				</a>						
+
+// 				</div>
+
+// 				</div>
+// 				</div>
+// 				`;
+
+
+// 				$(".bookDiv").append(HTMLtoInsert);
+// 				$currentBook = $(".book").eq(index);
+
+// 				$("h1", $currentBook).html(item.volumeInfo.title);	
+// 				$(".description", $currentBook).html(item.volumeInfo.description);
+// 				$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+// 				$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+// 				$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+// 				$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+// 				$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+
+// 				$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+
+// 				$('.hiddenFieldId',$currentBook).text(item.id);
+
+// 			});
+// 		});
+
+// };
+
+
+// LoadBooks();
+
+
+
 function LoadBooks() {
 
 	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
 
 	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
 
-var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
+	var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
 
-var UserID = "117214680027185876068";
+	var UserID = "117214680027185876068";
 
 
 $.ajax({
@@ -454,11 +540,11 @@ function AddToFavs(){
 		console.log($favorite);
 
 		db.transaction(function (tx) {
-				tx.executeSql('SELECT COUNT(*) as count FROM Books WHERE id = (?)', [$id], function(tx, count){
+				tx.executeSql('SELECT COUNT(*) as count FROM books WHERE id = (?)', [$id], function(tx, count){
 					if (count.rows[0].count==0){
-						tx.executeSql('INSERT INTO Books(id, favorite) VALUES(?,?)',[$id, $favorite]);
+						tx.executeSql('INSERT INTO books(id, favorite) VALUES(?,?)',[$id, $favorite]);
 					}else{
-						tx.executeSql('UPDATE books SET favorite = (?) WHERE $id = (?)', [$favorite, $id]);
+						tx.executeSql('UPDATE books SET favorite = (?) WHERE id = (?)', [$favorite, $id]);
 					};
 				});
 			});
@@ -566,7 +652,7 @@ function TryAgain(){
 
 		$(".likestar.glyphicon-star").css("color","#9999ff");
 
-		// db.transaction(function (tx) {
+		//db.transaction(function (tx) {
 		// tx.executeSql('DROP TABLE books');
 		// });
 
@@ -687,95 +773,13 @@ ClickFavs();
 
 
 
-
-
-
-
-
-
 //----------------------------//
 
 
-	// var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
-
-	// 	$input = $("#inputsearch").val();
-	
-	// $("#submitsearch").click(function() {
-
-
-	// $.ajax({
-
-	// 	url: "https://www.googleapis.com/books/v1/volumes?q=" + input
-
-	// }).done(function(data){
-
-		//empty book
-
-	// 	$.each(data.items, function(index, item){
-
-
-// 			var HTMLtoInsert = `
-// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
-// 			<div>	
-// 			<div class="cover">
-// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
-// 			<h1></h1>
-// 			</div>
-// 			</div>
-// 			<div class="text">				
-// 			<div class="booktext">
-// 			<p class="description"></p>
-
-// 			<div class="authorsection">
-// 			<span class="author">By </span>
-// 			<span class="authorsresults"></span>
-// 			</div>
-
-// 			<div class="ratingsection">
-// 			<span class="glyphicon glyphicon-star-empty"> </span>
-// 			<span class="averagerating"></span>	
-// 			</div>		
-
-// 			</div>
-
-// 			<div class="links">
-// 			<a target="_blank" class="linklivros preview" href="">
-// 			<span class="glyphicon glyphicon-book"></span>
-// 			Preview</a>	
-
-// 			<a target="_blank" class="linklivros googleplay" href="">
-// 			<span class="glyphicon glyphicon-shopping-cart"></span>
-// 			Google Play 
-// 			<span class="priceresults"></span>
-
-// 			</a>						
-
-// 			</div>
-
-// 			</div>
-// 			</div>
-// 			`;
-
-
-// 			$(".bookDiv").append(HTMLtoInsert);
-// 			$currentBook = $(".book").eq(index);
-
-// 			$("h1", $currentBook).html(item.volumeInfo.title);	
-// 			$(".description", $currentBook).html(item.volumeInfo.description);
-// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
-
-// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
-
-//  		});
-// 	});
 
 
 
-// });
+
 
 
 
