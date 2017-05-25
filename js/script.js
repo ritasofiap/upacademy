@@ -28,181 +28,202 @@ $('#consultDb').click(function(){
 
 //-----------ELEMENTOS HTML--------------------------------------//
 
-// function LoadBooks() {
-
-// 	$searchinput = $("#inputsearch").val();
-
-// 	$("#submitsearch").on( "click", function() {
-
-// 		$.ajax({
-
-// 			url: "https://www.googleapis.com/books/v1/volumes?q=" + searchinput + ""
-
-// 			//"&callback=handleResponse" 
-
-// 			// "&maxResults=10"
-
-// 		}).done(function(data){
-
-// 		$.each(data.items, function(index, item){
+var typing = false;
+var current = null;
+var currentIndex = 0;
 
 
-// 				var HTMLtoInsert = `
-// 				<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
-// 				<div>	
-// 				<div class="cover">
-// 				<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
-// 				<input type="hidden" class="hiddenFieldId"></input>
-// 				<h1></h1>
-// 				</div>
-// 				</div>
-// 				<div class="text">				
-// 				<div class="booktext">
-// 				<p class="description"></p>
-
-// 				<div class="authorsection">
-// 				<span class="author">By </span>
-// 				<span class="authorsresults"></span>
-// 				</div>
-
-// 				<div class="ratingsection">
-// 				<span class="glyphicon glyphicon-star-empty"> </span>
-// 				<span class="averagerating"></span>	
-// 				</div>		
-
-// 				</div>
-
-// 				<div class="links">
-// 				<a target="_blank" class="linklivros preview" href="">
-// 				<span class="glyphicon glyphicon-book"></span>
-// 				Preview</a>	
-
-// 				<a target="_blank" class="linklivros googleplay" href="">
-// 				<span class="glyphicon glyphicon-shopping-cart"></span>
-// 				Google Play 
-// 				<span class="priceresults"></span>
-
-// 				</a>						
-
-// 				</div>
-
-// 				</div>
-// 				</div>
-// 				`;
+$("#inputsearch").keyup(function(event){
+	if (event.which == 13) {
+		$("#submitbutton").submit();
+	};
+});
 
 
-// 				$(".bookDiv").append(HTMLtoInsert);
-// 				$currentBook = $(".book").eq(index);
-
-// 				$("h1", $currentBook).html(item.volumeInfo.title);	
-// 				$(".description", $currentBook).html(item.volumeInfo.description);
-// 				$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-// 				$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-// 				$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-// 				$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-// 				$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
-
-// 				$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
-
-// 				$('.hiddenFieldId',$currentBook).text(item.id);
-
-// 			});
-// 		});
-
-// };
 
 
-// LoadBooks();
-
+//--------//
 
 
 function LoadBooks() {
 
-	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
+	$("#submitbutton").click(function() {
 
-	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
-
-	var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
-
-	var UserID = "117214680027185876068";
+	var inputsearch = $("#inputsearch").val();
 
 
-$.ajax({
-	
-		url: "https://www.googleapis.com/books/v1/users/" + UserID + "/bookshelves/" + ShelfID + "/volumes?key=" + APIkey   //virgula pq e'um array
+	$.ajax({
 
-	}).done(function(data){
+			url: "https://www.googleapis.com/books/v1/volumes?q=" + inputsearch
 
-		console.log(data);
+
+		}).done(function(data){
 
 		$.each(data.items, function(index, item){
 
 
-			var HTMLtoInsert = `
-			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
-			<div>	
-			<div class="cover">
-			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
-			<input type="hidden" class="hiddenFieldId"></input>
-			<h1></h1>
-			</div>
-			</div>
-			<div class="text">				
-			<div class="booktext">
-			<p class="description"></p>
+				var HTMLtoInsert = `
+				<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+				<div>	
+				<div class="cover">
+				<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+				<input type="hidden" class="hiddenFieldId"></input>
+				<h1></h1>
+				</div>
+				</div>
+				<div class="text">				
+				<div class="booktext">
+				<p class="description"></p>
 
-			<div class="authorsection">
-			<span class="author">By </span>
-			<span class="authorsresults"></span>
-			</div>
+				<div class="authorsection">
+				<span class="author">By </span>
+				<span class="authorsresults"></span>
+				</div>
 
-			<div class="ratingsection">
-			<span class="glyphicon glyphicon-star-empty"> </span>
-			<span class="averagerating"></span>	
-			</div>		
+				<div class="ratingsection">
+				<span class="glyphicon glyphicon-star-empty"> </span>
+				<span class="averagerating"></span>	
+				</div>		
 
-			</div>
+				</div>
 
-			<div class="links">
-			<a target="_blank" class="linklivros preview" href="">
-			<span class="glyphicon glyphicon-book"></span>
-			Preview</a>	
+				<div class="links">
+				<a target="_blank" class="linklivros preview" href="">
+				<span class="glyphicon glyphicon-book"></span>
+				Preview</a>	
 
-			<a target="_blank" class="linklivros googleplay" href="">
-			<span class="glyphicon glyphicon-shopping-cart"></span>
-			Google Play 
-			<span class="priceresults"></span>
+				<a target="_blank" class="linklivros googleplay" href="">
+				<span class="glyphicon glyphicon-shopping-cart"></span>
+				Google Play 
+				<span class="priceresults"></span>
 
-			</a>						
+				</a>						
 
-			</div>
+				</div>
 
-			</div>
-			</div>
-			`;
+				</div>
+				</div>
+				`;
 
-			
-			$(".bookDiv").append(HTMLtoInsert);
-			$currentBook = $(".book").eq(index);
 
-			$("h1", $currentBook).html(item.volumeInfo.title);	
-			$(".description", $currentBook).html(item.volumeInfo.description);
-			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+				$(".bookDiv").append(HTMLtoInsert);
+				$currentBook = $(".book").eq(index);
 
-			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+				$("h1", $currentBook).html(item.volumeInfo.title);	
+				$(".description", $currentBook).html(item.volumeInfo.description);
+				$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+				$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+				$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+				$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+				$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
 
-			$('.hiddenFieldId',$currentBook).text(item.id);
+				$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
 
+				$('.hiddenFieldId',$currentBook).text(item.id);
+
+			});
 		});
-	});
+
+ });
 
 };
 
+
 LoadBooks();
+
+
+
+
+
+
+
+// function LoadBooks() {
+
+// 	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
+
+// 	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+
+// 	var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
+
+// 	var UserID = "117214680027185876068";
+
+
+// $.ajax({
+	
+// 		url: "https://www.googleapis.com/books/v1/users/" + UserID + "/bookshelves/" + ShelfID + "/volumes?key=" + APIkey   //virgula pq e'um array
+
+// 	}).done(function(data){
+
+// 		console.log(data);
+
+// 		$.each(data.items, function(index, item){
+
+
+// 			var HTMLtoInsert = `
+// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+// 			<div>	
+// 			<div class="cover">
+// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+// 			<input type="hidden" class="hiddenFieldId"></input>
+// 			<h1></h1>
+// 			</div>
+// 			</div>
+// 			<div class="text">				
+// 			<div class="booktext">
+// 			<p class="description"></p>
+
+// 			<div class="authorsection">
+// 			<span class="author">By </span>
+// 			<span class="authorsresults"></span>
+// 			</div>
+
+// 			<div class="ratingsection">
+// 			<span class="glyphicon glyphicon-star-empty"> </span>
+// 			<span class="averagerating"></span>	
+// 			</div>		
+
+// 			</div>
+
+// 			<div class="links">
+// 			<a target="_blank" class="linklivros preview" href="">
+// 			<span class="glyphicon glyphicon-book"></span>
+// 			Preview</a>	
+
+// 			<a target="_blank" class="linklivros googleplay" href="">
+// 			<span class="glyphicon glyphicon-shopping-cart"></span>
+// 			Google Play 
+// 			<span class="priceresults"></span>
+
+// 			</a>						
+
+// 			</div>
+
+// 			</div>
+// 			</div>
+// 			`;
+
+			
+// 			$(".bookDiv").append(HTMLtoInsert);
+// 			$currentBook = $(".book").eq(index);
+
+// 			$("h1", $currentBook).html(item.volumeInfo.title);	
+// 			$(".description", $currentBook).html(item.volumeInfo.description);
+// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+
+// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+
+// 			$('.hiddenFieldId',$currentBook).text(item.id);
+
+// 		});
+// 	});
+
+// };
+
+// LoadBooks();
 
 
 // MY BOOKSHELF LINK https://www.googleapis.com/books/v1/users/117214680027185876068/bookshelves/1001/volumes?key=AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg
@@ -307,12 +328,12 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
 			
-		});
+				});
 
 
 			//inAnimation = false;	
 
-		}else{
+			}else{
 
 				$parent.fadeOut(50, function(){					//book transition to next
 					$parent.removeClass("active");
@@ -392,7 +413,7 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
 
-			});
+					});
 				
 
 			}else{
@@ -674,7 +695,7 @@ function TryAgain(){
 
 		});
 	});
-}
+};
 
 TryAgain();
 
@@ -706,7 +727,7 @@ function Start(){
 		});
 	});
 	});
-}
+};
 
 Start();
 
