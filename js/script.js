@@ -56,6 +56,7 @@ function autoSearch(){
 
 
 $("#submitbutton").click(function() {
+	$('.bookDiv').empty();
 	LoadBooks();
 });
 
@@ -65,7 +66,6 @@ $("#submitbutton").click(function() {
 function LoadBooks() {
 
 	var inputsearch = $("#inputsearch").val();
-
 
 	// if(inputsearch == "") return;
 	// var filter = $('#ddlFilter option:selected').text();
@@ -92,13 +92,13 @@ function LoadBooks() {
 	// 	}
 	// }   + query
 
-
-
 	$.ajax({
 
 			url: "https://www.googleapis.com/books/v1/volumes?q=" + inputsearch + "&startIndex=" + currentIndex
 
 		}).done(function(data){
+
+			$('.bookDiv').empty();
 
 		$.each(data.items, function(index, item){
 
@@ -199,102 +199,101 @@ function LoadBooks() {
 
 
 
-
-
 $(document).on({
     ajaxStart: function() { $('body').addClass("loading"); },
     ajaxStop: function() { $('body').removeClass("loading"); }    
 });
 
 
+//---------//
 
-// function LoadBooks() {
+function LoadBookShelf() {
 
-// 	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
+	var clientID = "813842311915-0f78t2dfpsdab2829o7a0c32if99afee.apps.googleusercontent.com";
 
-// 	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
+	var APIkey = "AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg";
 
-// 	var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
+	var ShelfID = "1001";  //bookshelf nova (no url a seguiras_coll)
 
-// 	var UserID = "117214680027185876068";
+	var UserID = "117214680027185876068";
 
 
-// $.ajax({
+$.ajax({
 	
-// 		url: "https://www.googleapis.com/books/v1/users/" + UserID + "/bookshelves/" + ShelfID + "/volumes?key=" + APIkey   //virgula pq e'um array
+		url: "https://www.googleapis.com/books/v1/users/" + UserID + "/bookshelves/" + ShelfID + "/volumes?key=" + APIkey   //virgula pq e'um array
 
-// 	}).done(function(data){
+	}).done(function(data){
 
-// 		console.log(data);
+		console.log(data);
 
-// 		$.each(data.items, function(index, item){
+		$.each(data.items, function(index, item){
 
 
-// 			var HTMLtoInsert = `
-// 			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
-// 			<div>	
-// 			<div class="cover">
-// 			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
-// 			<input type="hidden" class="hiddenFieldId"></input>
-// 			<h1></h1>
-// 			</div>
-// 			</div>
-// 			<div class="text">				
-// 			<div class="booktext">
-// 			<p class="description"></p>
+			var HTMLtoInsert = `
+			<div class="book col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" id="book1">
+			<div>	
+			<div class="cover">
+			<a class="imglink" target="_blank" href=""><img class="imgadjust img" src=""></a>	
+			<input type="hidden" class="hiddenFieldId"></input>
+			<h1></h1>
+			</div>
+			</div>
+			<div class="text">				
+			<div class="booktext">
+			<p class="description"></p>
 
-// 			<div class="authorsection">
-// 			<span class="author">By </span>
-// 			<span class="authorsresults"></span>
-// 			</div>
+			<div class="authorsection">
+			<span class="author">By </span>
+			<span class="authorsresults"></span>
+			</div>
 
-// 			<div class="ratingsection">
-// 			<span class="glyphicon glyphicon-star-empty"> </span>
-// 			<span class="averagerating"></span>	
-// 			</div>		
+			<div class="ratingsection">
+			<span class="glyphicon glyphicon-star-empty"> </span>
+			<span class="averagerating"></span>	
+			</div>		
 
-// 			</div>
+			</div>
 
-// 			<div class="links">
-// 			<a target="_blank" class="linklivros preview" href="">
-// 			<span class="glyphicon glyphicon-book"></span>
-// 			Preview</a>	
+			<div class="links">
+			<a target="_blank" class="linklivros preview" href="">
+			<span class="glyphicon glyphicon-book"></span>
+			Preview</a>	
 
-// 			<a target="_blank" class="linklivros googleplay" href="">
-// 			<span class="glyphicon glyphicon-shopping-cart"></span>
-// 			Google Play 
-// 			<span class="priceresults"></span>
+			<a target="_blank" class="linklivros googleplay" href="">
+			<span class="glyphicon glyphicon-shopping-cart"></span>
+			Google Play 
+			<span class="priceresults"></span>
 
-// 			</a>						
+			</a>						
 
-// 			</div>
+			</div>
 
-// 			</div>
-// 			</div>
-// 			`;
+			</div>
+			</div>
+			`;
 
 			
-// 			$(".bookDiv").append(HTMLtoInsert);
-// 			$currentBook = $(".book").eq(index);
+			$(".bookDiv").append(HTMLtoInsert);
+			$currentBook = $(".book").eq(index);
 
-// 			$("h1", $currentBook).html(item.volumeInfo.title);	
-// 			$(".description", $currentBook).html(item.volumeInfo.description);
-// 			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-// 			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-// 			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-// 			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-// 			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+			$("h1", $currentBook).html(item.volumeInfo.title);	
+			$(".description", $currentBook).html(item.volumeInfo.description);
+			$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+			$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+			$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+			$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+			$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
 
-// 			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+			$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
 
-// 			$('.hiddenFieldId',$currentBook).text(item.id);
+			$('.hiddenFieldId',$currentBook).text(item.id);
 
-// 		});
-// 	});
+		});
+	});
 
-// };
+};
 
-// LoadBooks();
+LoadBookShelf();
 
 
 // MY BOOKSHELF LINK https://www.googleapis.com/books/v1/users/117214680027185876068/bookshelves/1001/volumes?key=AIzaSyC6f596A6x4SmCSiAhZ-BrM9_UZ5czZSGg
@@ -422,11 +421,11 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 		};
 
-		currentIndex++;
-			if((currentIndex % 10) == 0){
-			LoadBooks();
-			inAnimation = false;
-			};
+		// currentIndex++;
+		// 	if((currentIndex % 10) == 0){
+		// 	LoadBooks();
+		// 	inAnimation = false;
+		// 	};
 
 	};
 

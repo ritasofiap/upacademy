@@ -32,7 +32,6 @@ h1:hover{
 
 
 #consultDb {
-
 }
 
 
@@ -53,6 +52,7 @@ h1:hover{
 body.loading .modal {
     display: block;
 }
+
 
 body.loading .bookContainer{
 	display:none;
@@ -81,14 +81,12 @@ body.loading .bookContainer{
 	-moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
     -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
 	box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-	}
+}
 
 
 .input-group{
 	max-width: 300px;
 	margin-top: 8px;
-
-
 }
 
 .barra{
@@ -110,7 +108,6 @@ body.loading .bookContainer{
 	margin-bottom: 0px;
 	border:none;
 	background-color: transparent;
-
 }
 
 
@@ -164,7 +161,6 @@ body.loading .bookContainer{
 	-moz-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
-
 }
 
 .favorites {
@@ -184,10 +180,6 @@ body.loading .bookContainer{
 	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
 }
 
-
-
-
-
 .title {
 	border-style: solid;
 	border-color: transparent;
@@ -204,7 +196,6 @@ body.loading .bookContainer{
 	font-size: 35px;
 /*	padding-top: 20px;*/
 	box-shadow: 5px 5px 10px #151122;
-
 }
 
 .minititle {
@@ -219,7 +210,6 @@ body.loading .bookContainer{
 }
 
 
-
 .book {
 	/*border-radius: 10px;*/
 	margin-top: 20px;
@@ -230,7 +220,6 @@ body.loading .bookContainer{
 
 .book.active {
 	display: block;
-	
 }
 
 .cover{
@@ -270,7 +259,6 @@ body.loading .bookContainer{
 }
 
 .author {
-
 }
 
 .authorsection {
@@ -320,11 +308,9 @@ body.loading .bookContainer{
 }
 
 
-
 .divider{
 	width: 15px;
 	display: inline-block;
-
 }
 
 
@@ -361,7 +347,6 @@ body.loading .bookContainer{
 .rowbuttons{
 	margin-bottom: 50px;
 	margin-right: 0px;
-
 }
 
 .btn, .lastbtn {
@@ -423,7 +408,6 @@ body.loading .bookContainer{
 }
 
 
-
 #btnlike{ /*antigo focus*/
 	background-color: transparent;
 	color: white;
@@ -437,7 +421,6 @@ body.loading .bookContainer{
 	outline: 0 !important;
 	transform: scale(1.1);
 }
-
 
 
 .backbtn, .pstart {
@@ -456,7 +439,6 @@ body.loading .bookContainer{
 
 
 .backfromfavs {
-
     background-color: transparent;
     /*background: rgba(255, 255, 255, 0.1);*/
     border-radius: 8px;
@@ -520,7 +502,6 @@ body.loading .bookContainer{
 
 
 .links{
-	
 	margin-top: 15px;
 	margin-left: 0px;
 	margin-bottom: 5px;
@@ -538,7 +519,6 @@ body.loading .bookContainer{
 	-moz-box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
-
 }
 
 
@@ -549,7 +529,7 @@ body.loading .bookContainer{
 
  .reloadpage:hover{
  	color:#00cc52; 
- }
+}
 
 
 .linklivros:link, .linklivros:visited {
@@ -635,14 +615,9 @@ body.loading .bookContainer{
 color: #099FFF;
 }
 
-
-
-
 #liketxt{
 	font-weight: normal;
 }
-
-
 
 .counterslike {
 	background-color:#161023;
@@ -653,7 +628,6 @@ color: #099FFF;
 	-moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
 }
 
 .countersdislike {
@@ -681,17 +655,10 @@ color: #099FFF;
 	margin-top:30px;
 	color: #00FF66;
 
-
     -moz-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
-	
-
-
-	/*font-weight: bold; */
-	/*padding: 40px 40px 40px 40px;*/
 }
-
 
 .listalivros{
 	display: inline-block;
@@ -708,7 +675,6 @@ color: #099FFF;
 	font-family: 'Press Start 2P', cursive;
 }
 
-
 #discworld {
 	max-width: 350px;
 	margin: auto;
@@ -719,7 +685,6 @@ color: #099FFF;
 	filter: grayscale(100%);
 }
 
-
 #discworld:hover{
 	-webkit-transform: scale(1.2);
 	-moz-transform:scale(1.2);
@@ -729,14 +694,7 @@ color: #099FFF;
     box-shadow: 0 0 3em #000000;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
-
 }
-
-/*.barra{
-	background-color: #161023;
-
-	height: 10px;
-}*/
 
 #scores {
 	font-family: 'Press Start 2P', cursive;
@@ -752,13 +710,7 @@ color: #099FFF;
 	-moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
 }
-
-/*#sadface {
-	max-width: 30px;
-}
-*/
 
 .tryagain {
 	padding-top: 30px;
@@ -775,12 +727,10 @@ color: #099FFF;
 	-moz-box-shadow: 0px 10px 20px rgba(0,0,0,.5);
     -webkit-box-shadow: 0px 10px 20px rgba(0,0,0,.5);
 	box-shadow: 0px 10px 20px rgba(0,0,0,.5);
-
 }
 
 .recommendations{
 	display: none;
-	
 }
 
 .recommendations.active{
@@ -823,10 +773,10 @@ color: #099FFF;
 @keyframes blink { 
    50% { border-color: #352b54;} 
 }
+
 .otherrecom { 
     animation: blink .4s step-end infinite alternate;
 }
-
 
 .otherbooks{
 	
@@ -848,13 +798,6 @@ color: #099FFF;
 	text-decoration: none;
 }
 
-
-
-
-/*.setas{
-	max-width: ;
-}*/
-
 .glyphicon-menu-right, .glyphicon-menu-left {
 	font-size:20px;
 	font-weight: bold;
@@ -873,14 +816,6 @@ color: #099FFF;
 	text-align: center;
 }
 
-
-
-/*só aparecer 1 livro*/
-/*.book:not(:first-of-type){
-	display: none;
-}*/ 
-
-
 .price{
 	font-family: 'Raleway', sans-serif;
 	color: #e6e6ff;
@@ -889,17 +824,6 @@ color: #099FFF;
 	border-style: none;
 	margin-top:5px;
 	padding: 10px 10px 10px 0px;
-
-	/*text-align: center;
-	color:#099FFF;
-	font-size: 20px;
-	font-family: 'Raleway', sans-serif;
-	font-variant: small-caps; 
-	font-weight: bolder;
-	margin-top:30px;
-	margin-bottom: 20px;
-	border-style: none;
-	text-decoration: none;*/
 }
 
 .price:hover, .price:active, .price:focus{
@@ -907,8 +831,6 @@ color: #099FFF;
 	color:#00FF66;
 	text-decoration: none;
 }
-
-
 
 .footer {
 	text-align: center;
@@ -925,10 +847,8 @@ color: #099FFF;
 	margin-bottom: 20px;
 }
 
-
 #coin {
 	max-height: 30px;
-
 }
 
 
@@ -937,7 +857,6 @@ color: #099FFF;
 	#discworld {
 	max-width: 250px;
 	}
-
 
 	.navbar-form, .navbar-left {
 	border: none;
@@ -956,13 +875,12 @@ color: #099FFF;
 	display: inline-block;
 	}	
 
-
-
-
 @media screen and (max-width: 550px){
+	
 	h1{
 	font-size: 18px;
 	}
+
 	.imgadjust {
 	max-width: 250px;
 	}
@@ -978,10 +896,6 @@ color: #099FFF;
 	#btnbacktxt {
 	font-size: 15px;
 	}
-
-	/*.glyphicon {
-	font-size: 25px;
-	}*/
 
 	.links{
 		font-size: 11px;
@@ -1004,15 +918,13 @@ color: #099FFF;
 	font-weight: bold;
 	}
 
-
 	.glyphicon-thumbs-down, .glyphicon-thumbs-up {
 	font-size: 18px;
 	}
 
 	.glyphicon-repeat, .glyphicon-forward{
 	font-size: 10px;
-	color: #262626;  /*pq ainda nao está funcional*/
-	/*color: #099FFF;*/
+	color: #262626;  
 	}
 
 	.likestar {
@@ -1020,13 +932,8 @@ color: #099FFF;
 	color: white;
 	}
 
-
-
-
-
 @media screen and (max-width: 470px){
 	
-
 	.imgadjust {
 		max-width: 200px;
 	}
@@ -1051,11 +958,10 @@ color: #099FFF;
 		font-size: 10px;
 	}
 	
-
 	.glyphicon-menu-right, .glyphicon-menu-left {
 	font-size:8px;
 	font-weight: bold;
-}
+	}
 
 	.glyphicon-user, .glyphicon-log-in, .glyphicon-star, .glyphicon-search{
 		font-size: 12px;
