@@ -57,6 +57,8 @@ function autoSearch(){
 
 $("#submitbutton").click(function() {
 	$('.bookDiv').empty();
+
+	
 	LoadBooks();
 });
 
@@ -99,6 +101,7 @@ function LoadBooks() {
 		}).done(function(data){
 
 			$('.bookDiv').empty();
+			
 
 		$.each(data.items, function(index, item){
 
@@ -396,6 +399,11 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 					$(".buttonsLD").fadeOut(50, function(){
 						$(".buttonsLD").removeClass("active");
 					});
+
+
+					
+
+
 
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
