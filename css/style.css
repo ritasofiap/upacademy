@@ -36,11 +36,33 @@ h1:hover{
 }
 
 
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .15 ) 
+                url('https://d2xgf76oeu9pbh.cloudfront.net/images/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+body.loading .modal {
+    display: block;
+}
+
+body.loading .bookContainer{
+	display:none;
+}
 
 
 #br {
 	font-size: 1px;
 }
+
 
 
 .start {
@@ -62,7 +84,12 @@ h1:hover{
 	}
 
 
+.input-group{
+	max-width: 300px;
+	margin-top: 8px;
 
+
+}
 
 .barra{
 	line-height: 100%;
@@ -333,6 +360,7 @@ h1:hover{
 
 .rowbuttons{
 	margin-bottom: 50px;
+	margin-right: 0px;
 
 }
 

@@ -37,21 +37,26 @@
      						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
      						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      						<li class="navstar"><a href="#"><span class="navstar glyphicon glyphicon-star"></span> Favorites</a></li>
-     						<li>
-
-                                        <div>
-     								<div class="input-group">
-     								  <input type="text" id="inputsearch" class="form-control" placeholder="Search" autocomplete="off">
-     								  <div class="input-group-btn">
-                                                  <button type="submit" id="submitbutton" class="glyphicon glyphicon-search">
-                                                  </button>
-                                               </div>
-                                             </div>
-                                        </div>
-
-     						</li>
      					</ul>
-     				</div>
+
+                              <ul class="input-group navbar-right">
+                                 <input type="text" id="inputsearch" class="form-control" placeholder="Search" autocomplete="off">
+                                 <div class="input-group-btn">
+                                   <button type="submit" id="submitbutton" class="glyphicon glyphicon-search">
+                                   </button>
+                              </div>
+
+                              <!-- <select id="ddlFilter">
+                                   <option>Title</option>
+                                   <option>Author</option>
+                                   <option>Publisher</option>
+                                   <option>Subject</option>
+                                   <option>ISBN</option>
+                              </select>
+                              <input type="text" id="tbFilter">
+ -->
+                         </ul>
+                    </div>
      			</nav>
      		
 
@@ -83,6 +88,9 @@
                     
      			<div class="bookDiv">		
      			</div>
+
+
+                    <div class="modal"><!-- Place at bottom of page --></div>
 
 
      			<!-- Buttons -->
@@ -137,7 +145,7 @@
      				</div>
      			</div>
      			<!-- /Buttons --> 
-
+                    
 
      			<div class="lastpage" id="lastpage">
 

@@ -32,30 +32,71 @@ var typing = false;
 var current = null;
 var currentIndex = 0;
 
-
 $("#inputsearch").keyup(function(event){
 	if (event.which == 13) {
-		$("#submitbutton").submit();
-	};
+		clearTimeout(current);
+		autoSearch();
+
+	}else if (!typing){
+		typing = true;
+		current = setTimeout( function(){ autoSearch(); }, 2000);	
+
+	}else{
+		clearTimeout(current);
+		current = setTimeout( function(){ autoSearch(); }, 2000);	
+	}
 });
 
 
+function autoSearch(){
+	typing = false;
+	currentIndex = 0;
+	LoadBooks();	
+};
 
+
+$("#submitbutton").click(function() {
+	LoadBooks();
+});
 
 //--------//
 
 
 function LoadBooks() {
 
-	$("#submitbutton").click(function() {
-
 	var inputsearch = $("#inputsearch").val();
+
+
+	// if(inputsearch == "") return;
+	// var filter = $('#ddlFilter option:selected').text();
+	// var filterText = $('#tbFilter').val();
+	// var query = "";
+
+	// if(filterText != ""){			
+	// 	switch(filter){
+	// 		case 'Title':
+	// 			query = "+intitle:" + filterText;
+	// 			break;
+	// 		case 'Author':
+	// 			query = "+inauthor:" + filterText;
+	// 			break;
+	// 		case 'Publisher':
+	// 			query = "+inpublisher:" + filterText;
+	// 			break;
+	// 		case 'Subject':
+	// 			query = "+subject:" + filterText;
+	// 			break;
+	// 		case 'ISBN':
+	// 			query = "+isbn:" + filterText;
+	// 			break;
+	// 	}
+	// }   + query
+
 
 
 	$.ajax({
 
-			url: "https://www.googleapis.com/books/v1/volumes?q=" + inputsearch
-
+			url: "https://www.googleapis.com/books/v1/volumes?q=" + inputsearch + "&startIndex=" + currentIndex
 
 		}).done(function(data){
 
@@ -109,31 +150,61 @@ function LoadBooks() {
 				$(".bookDiv").append(HTMLtoInsert);
 				$currentBook = $(".book").eq(index);
 
-				$("h1", $currentBook).html(item.volumeInfo.title);	
-				$(".description", $currentBook).html(item.volumeInfo.description);
-				$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
-				$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
-				$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
-				$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
-				$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+				if( typeof item.volumeInfo.title !== "undefined"){
+					$("h1", $currentBook).html(item.volumeInfo.title);	
+				}
 
-				$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+				if( typeof item.volumeInfo.description !== "undefined"){
+					$(".description", $currentBook).html(item.volumeInfo.description);
+				}
 
-				$('.hiddenFieldId',$currentBook).text(item.id);
+				if( typeof item.volumeInfo.imageLinks.thumbnail !== "undefined"){
+					$(".imgadjust", $currentBook).attr("src",item.volumeInfo.imageLinks.thumbnail);
+				}
+
+				if( typeof item.volumeInfo.authors !== "undefined"){
+					$(".authorsresults", $currentBook).html(item.volumeInfo.authors);
+				}
+
+				if( typeof item.saleInfo.buyLink !== "undefined"){
+					$(".googleplay", $currentBook).attr("href",item.saleInfo.buyLink);
+				}
+
+				if( typeof item.volumeInfo.previewLink !== "undefined"){
+					$(".preview", $currentBook).attr("href",item.volumeInfo.previewLink);
+					$(".imglink", $currentBook).attr("href",item.volumeInfo.previewLink);
+				}
+
+				if( typeof item.volumeInfo.averageRating !== "undefined"){
+					$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+				}
+
+				if( typeof item.volumeInfo.averageRating !== "undefined"){
+					$(".averagerating", $currentBook).html(item.volumeInfo.averageRating);
+				}
+
+				if( typeof item.id !== "undefined"){
+					$('.hiddenFieldId',$currentBook).text(item.id);
+				}				
+			
 
 			});
+
+		$('.book:first-of-type').addClass('active');
+
 		});
-
- });
-
+		
+ 
 };
 
 
-LoadBooks();
 
 
 
-
+$(document).on({
+    ajaxStart: function() { $('body').addClass("loading"); },
+    ajaxStop: function() { $('body').removeClass("loading"); }    
+});
 
 
 
@@ -275,6 +346,8 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			$(".likestar.glyphicon-star").css("color","#9999ff");   //repor cor star
 
 
+			
+
 			$id = $('.hiddenFieldId',$parent).text();
 			$opinion = $(this).attr('data-opinion');
 			console.log($opinion);
@@ -349,6 +422,12 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 
 		};
 
+		currentIndex++;
+			if((currentIndex % 10) == 0){
+			LoadBooks();
+			inAnimation = false;
+			};
+
 	};
 
 					
@@ -379,6 +458,7 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 
 			$(".likestar.glyphicon-star").css("color","#9999ff");    //repor cor star
 
+			
 			$id = $('.hiddenFieldId',$parent).text();
 			$opinion = $(this).attr('data-opinion');
 			console.log($opinion);
@@ -431,6 +511,13 @@ function ClickDislike(){			//qdo clicka dislike (adiciona à lista dislikes + tr
 				});
 				
 			};
+
+			currentIndex++;
+			if((currentIndex % 10) == 0){
+			LoadBooks();
+			inAnimation = false;
+			};
+
 		};
 
 
