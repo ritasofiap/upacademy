@@ -195,16 +195,18 @@ body.loading .bookContainer{
 }
 
 
-.book {
+.book, .clearsearchdiv {
 	margin-top: 20px;
 	padding-top: 20px;
 	border-radius: 20px;
 	display: none;
 }
 
-.book.active {
+.book.active, .clearsearchdiv.active {
 	display: block;
 }
+
+
 
 .cover{
 	margin-top: 0px;

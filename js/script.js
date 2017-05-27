@@ -307,11 +307,6 @@ LoadBookShelf();
 
 $(".reloadpage").click(function(){
 	window.location.reload();
-
-	// db.transaction(function (tx) {
-	// 	tx.executeSql('DROP TABLE books');
-	// });
-
 });
 
 
@@ -354,13 +349,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 			$opinion = $(this).attr('data-opinion');
 			console.log($opinion);
 
-			//if exists -> update, else insert
-
-			// db.transaction(function (tx) {
-			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES("' + $id + '","' + $opinion + '")');    //VALUES(?,?), [$id,$opinion]
-			// });
-
-
+		
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT COUNT(*) as count FROM books WHERE id = (?)', [$id], function(tx, count){
 					if (count.rows[0].count==0){
@@ -371,20 +360,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 				});
 			});
 
-		
-
-			// 	IF EXISTS (SELECT $opinion FROM books WHERE $id='')
 				
-			// 	tx.executeSql('UPDATE books SET $opinion='' WHERE $id='', [$id,$opinion]');   
-						
-			// 	ELSE
-							
-			// 	tx.executeSql('INSERT INTO books(id, opinion) VALUES(?,?), [$id,$opinion]');    //
-			// });
-
-
-
-		
 			if ($parent.index() == $(".book").length-1){
 
 				$parent.fadeOut(50, function(){			//book transition to last page
@@ -401,10 +377,7 @@ function ClickLike(){				//qdo clicka like (adiciona à lista likes + transita p
 					});
 
 
-					
-
-
-
+				
 			// $('.recommendations').addClass("active");
 			$('.otherrecom').addClass("active");
 			
@@ -646,7 +619,6 @@ ClickBackLike();
 
 //---------ADICIONAR AOS FAVORITOS qdo clicka star-------//
 
-function AddToFavs(){	
 
 	$(".star").click(function(){
 
@@ -674,9 +646,8 @@ function AddToFavs(){
 		$('.favspage').find('.imgadjust').css("max-height","200px").css("margin-top","30px").css("margin-bottom","30px").css("display", "inline-block").css("margin","20px");
 
 	});
-};
 
-AddToFavs();
+
 
 
 //-------------------------//
@@ -887,6 +858,11 @@ ClickFavs();
 //-------------------------------------//
 
 
+	$(".clearsearch").click(function() {
+		$(".bookDiv").empty();
+	});
+
+
 
 
 
@@ -895,45 +871,5 @@ ClickFavs();
 
 
 
-
-
-
-
-
-
-//-----------------//
-
-
-//open database
-//create table
-
-
-// function LoadBook(book){
-// 	//load de um livro
-// }
-
-// $('.buttons button').click(function(){
-// 	//click de like/dislike
-// });
-
-// var typing = false;
-// var current = null;  //variavel q guarda o timeout pa limpar ou nao os 2seg da pesquisa automatica
-// var currentIndex = 0;
-
-// $('#tbSearch, #tbFilter').keyup(function(event){
-// 	//keyup dos inputs (indica que o utilizador está a escrever)
-// });
-
-// function autoSearch(){
-// 	//nova pesquisa (por contador ou após pressionar Enter)
-// }
-
-// function getData(){
-// 	//recolha de dados dos inputs/selects e efectuar pedido AJAX para recebermos os livros
-// }
-
-
-// // se quiserem implementar o gif de LOADING 
-// //https://stackoverflow.com/questions/1964839/how-can-i-create-a-please-wait-loading-animation-using-jquery
 
 
