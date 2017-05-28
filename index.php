@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
@@ -26,26 +27,34 @@
 
 
 						<li class="navbar-nav home"><a class="minititle reloadpage" href="javascript:void(0)"><span class="glyphicon glyphicon-fire"></span>TINDERBOOK</a></li>
-    					  <!-- 	<li><a class="menu" href="#">Tab</a></li>
-     						<li><a class="menu" href="#">Tab</a></li>
-     						<li><a class="menu" href="#">Tab</a></li> -->
-     					</ul>
+    					 	</ul>
 
      					<ul class="nav navbar-nav navbar-right">
+                                   <li><button class="clearsearch">Clear Search</button></li>
      						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
      						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      						<li class="navstar"><a href="#"><span class="navstar glyphicon glyphicon-star"></span> Favorites</a></li>
-     						<li>
-     							<form class="navbar-form navbar-left" role="search">
-     								<div class="form-group">
-     									<input type="text" class="form-control" placeholder="Search">
-     								</div>
-     								<button type="submit" class="glyphicon glyphicon-search"></button>
-     							</form>
-
-     						</li>
      					</ul>
-     				</div>
+
+                              <ul class="input-group navbar-right">
+                                 <input type="text" id="inputsearch" class="form-control" placeholder="Search" autocomplete="off">
+                                 <div class="input-group-btn">
+                                   <button type="submit" id="submitbutton" class="glyphicon glyphicon-search">
+                                   </button>
+
+                              </div>
+
+                              <!-- <select id="ddlFilter">
+                                   <option>Title</option>
+                                   <option>Author</option>
+                                   <option>Publisher</option>
+                                   <option>Subject</option>
+                                   <option>ISBN</option>
+                              </select>
+                              <input type="text" id="tbFilter">
+ -->
+                              </ul>
+                    </div>
      			</nav>
      		
 
@@ -58,7 +67,7 @@
      				</div>
      				<button class="pstart">
      					<p id="pstarttxt">PRESS START</p>
-     				</button>
+                         </button>
      				<div class="arrows">
      					<div class="glyphicon glyphicon-menu-left right"></div>
      					<div class="glyphicon glyphicon-menu-left middle"></div> 
@@ -66,7 +75,8 @@
      				</div>
      				<br>
      				<br>
-     				<img id="coin" src="img/coin2.gif">
+                         <img id="coin" src="img/coin2.gif">
+                         
 
      			</div>
 
@@ -78,38 +88,44 @@
      			<div class="bookDiv">		
      			</div>
 
+                    <div class="clearsearchdiv">
+                    </div>
+
+
+                    <div class="modal"></div>
+
 
      			<!-- Buttons -->
      			<div class="row rowbuttons">
-     				<div class="buttons col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+     				<div class="buttons col-xs-12 col-md-12">
      					<div class="buttonsLD">
 
      						<button class="btn backlike"> 
      							<span class="glyphicon glyphicon-repeat"></span>
-     							<!-- <br> -->
+     							
      							<span id="liketxt"><br></span>
      						</button>
 
      						<div class="divider"></div>
 
-     						<button class="btn btnlike" id="btnlike">
+     						<button class="btn btnlike" id="btnlike" data-opinion="like">
      							<span class="glyphicon glyphicon-thumbs-up"></span>
-     							<!-- <br> -->
+     							
      							<span id="liketxt"><br></span>
      						</button>
      						<div class="divider"></div>
 
-                                   <button class="btn star">
+                                   <button class="btn star" data-favorite="favorite">
                                         <span class="likestar glyphicon glyphicon-star"></span>
-                                        <!--   <br> -->
+                                        
                                         <span id="liketxt"><br></span>
                                    </button>
 
 
                                    <div class="divider"></div>
-     						<button class="btn btndislike" id="btndislike"> 
+     						<button class="btn btndislike" id="btndislike" data-opinion="dislike"> 
      							<span class="glyphicon glyphicon-thumbs-down"></span>
-     							<!-- <br> -->
+     							
      							<span id="liketxt"><br></span>
      						</button>
 
@@ -118,7 +134,6 @@
 
                                      <button class="btn skip" id="skip"> 
                                         <span class="glyphicon glyphicon-forward"></span>
-                                        <!-- <br> -->
                                         <span id="skiptxt"><br></span>
                                    </button>
                                    
@@ -131,9 +146,28 @@
      				</div>
      			</div>
      			<!-- /Buttons --> 
-
+                    
 
      			<div class="lastpage" id="lastpage">
+
+                         <div class="tryagain col-xs-12 col-md-12">
+                                        <div class="arrows">
+                                             <div class="glyphicon glyphicon-menu-right left"></div>
+                                             <div class="glyphicon glyphicon-menu-right middle"></div>
+                                             <div class="glyphicon glyphicon-menu-right right"></div>
+                                        </div>
+                                        <button class= "backbtn" id="btnback">
+                                             <p id="btnbacktxt">TRY AGAIN?</p>
+
+                                        </button>
+                                        <div class="arrows">
+                                             <div class="glyphicon glyphicon-menu-left right"></div>
+                                             <div class="glyphicon glyphicon-menu-left middle"></div>
+                                             <div class="glyphicon glyphicon-menu-left left"></div>
+                                        </div>
+                                        
+                                   </div>
+
 
      				<div class="likescounter col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
 
@@ -161,8 +195,7 @@
      					</div>
     				</div>
 
-     			<!-- 	<div class="recommendations col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4"> 				</div> -->
-
+     		
      				<div class="otherrecom col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
                               CLICK FOR MORE<br>
      					<a class="otherbooks" id="fiction" target="_blank" href="https://www.goodreads.com/shelf/show/fiction">
@@ -172,10 +205,10 @@
                               <a class="otherbooks" id="fantasy"  target="_blank" href="https://www.goodreads.com/shelf/show/fantasy">
                               FANTASY   
                               </a> <br>
-                              <span>BOOK RECOMMENDATIONS</span>
+                              <span>BOOK RECOMMENDATIONS!</span>
      					</div>
 
-     						<div class="tryagain fundo col-xs-12 col-md-12">
+     						<div class="tryagainbottom fundo col-xs-12 col-md-12">
      							<div class="arrows">
      								<div class="glyphicon glyphicon-menu-right left"></div>
      								<div class="glyphicon glyphicon-menu-right middle"></div>
@@ -190,8 +223,7 @@
      								<div class="glyphicon glyphicon-menu-left middle"></div>
      								<div class="glyphicon glyphicon-menu-left left"></div>
      							</div>
-     							<!-- <br> -->
-     							<!-- <img id="coin" src="img/coin2.gif"> -->
+     							
      						</div>
      					</div>
 
@@ -206,7 +238,7 @@
                                    </div>
 
                                    <button class="backfromfavs">
-                                         <span class="glyphicon glyphicon-repeat"></span>
+                                         <span class="backfromfavs glyphicon glyphicon-repeat"></span>
                                          <span id="backfromfavstxt">Back</span>
                                    </button>
                                
@@ -214,6 +246,9 @@
 
      					</div>
      				</div>
+
+                         <button id="consultDb">Database</button>
+
 
      				<div class="row">
      					<div class="footer col-xs-10 col-xs-offset-1">
