@@ -25,7 +25,6 @@
 
 					<ul class="nav navbar-nav">
 
-
 						<li class="navbar-nav home"><a class="minititle reloadpage" href="javascript:void(0)"><span class="glyphicon glyphicon-fire"></span>TINDERBOOK</a></li>
     					 	</ul>
 
