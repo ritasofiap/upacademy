@@ -58,7 +58,6 @@ function autoSearch(){
 $("#submitbutton").click(function() {
 	$('.bookDiv').empty();
 
-	
 	LoadBooks();
 });
 
@@ -195,9 +194,17 @@ function LoadBooks() {
 
 		$('.book:first-of-type').addClass('active');
 
+		$(".lastpage").fadeOut(50, function(){
+			$(".lastpage").removeClass("active");
+
+			$conjuntobuttons.fadeIn(300, function(){
+				$conjuntobuttons.addClass("active");
+			});
+
+		});
+
 		});
 		
- 
 };
 
 
